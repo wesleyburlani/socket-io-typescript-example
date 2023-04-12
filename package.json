@@ -1,0 +1,55 @@
+{
+  "name": "websocket-test",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "server": "ts-node server/index.ts",
+    "client": "node client/index.js"
+  },
+  "dependencies": {
+    "@types/socket.io": "^3.0.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "es6-shim": "^0.35.8",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.0",
+    "reflect-metadata": "^0.1.13",
+    "socket-controllers": "^0.2.0",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1",
+    "typedi": "^0.10.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@jest/globals": "^29.4.1",
+    "@types/async-retry": "^1.4.5",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "commitizen": "^4.3.0",
+    "esbuild": "^0.17.5",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^8.0.3",
+    "prettier": "^2.5.1",
+    "rollup": "^2.75.7",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "standard-version": "^9.5.0",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  },
+  "volta": {
+    "node": "18.12.0",
+    "yarn": "1.22.19"
+  }
+}
