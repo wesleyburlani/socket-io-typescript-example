@@ -12,16 +12,25 @@ const SECRET_KEY = 'your secret or public key';
 export class JwtVerifierMiddleware implements MiddlewareInterface {
   use(socket: Socket, next: (err?: Error) => void) {
     try {
-      if (socket.handshake.query && socket.handshake.query.token) {
-        const token = socket.handshake.query.token;
+      if (socket.handshake.auth && socket.handshake.auth.token) {
+        const token = socket.handshake.auth.token;
         verify(token, SECRET_KEY, function (err, decoded) {
           if (err) {
-            throw new Error('Authentication error');
+            throw new Error(err.message);
           }
-          const { id, email }: JwtPayload = decoded;
+          const { id, email, exp }: JwtPayload = decoded;
+
+          // schedules the socket to disconnect as soon as the token expires
+          const expiresIn = Math.max(0, exp * 1000 - new Date().getTime());
+          setTimeout(() => {
+            socket.emit('token_expired', token);
+            socket.disconnect(true);
+          }, expiresIn);
+
           if (!(id && email)) {
             throw new Error('Authentication error');
           }
+
           (socket as SocketWithToken).decodedToken = {
             id,
             email,

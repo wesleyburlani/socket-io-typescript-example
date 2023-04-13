@@ -11,6 +11,6 @@
     "experimentalDecorators": true,
     "noImplicitAny": false
   },
-  "include": ["server", "client"],
+  "include": ["server", "client", "load-balancer", "common"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.e2e-spec.ts"]
 }

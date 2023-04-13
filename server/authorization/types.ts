@@ -15,5 +15,5 @@ export interface JwtUser extends JwtUserPayload {
 }
 
 export class SocketWithToken extends Socket {
-  decodedToken: JwtUser;
+  decodedToken?: JwtUser;
 }
