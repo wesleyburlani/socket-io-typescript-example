@@ -3,7 +3,8 @@ import * as express from 'express';
 import type { Request, Response } from 'express';
 import { getEnvironmentKeys } from '../common/env';
 
-const { LOAD_BALANCER_URL } = getEnvironmentKeys();
+const { LOAD_BALANCER_URL, NUMBER_OF_SERVERS_TO_SPAWN } = getEnvironmentKeys();
+const LOAD_BALANCER_PORT = Number(new URL(LOAD_BALANCER_URL).port);
 
 function spawnServer(port: number) {
   const server = spawn('npm', ['run', 'server'], {
@@ -19,18 +20,21 @@ function spawnServer(port: number) {
   });
 }
 
-let index = 0;
-const ports = [3001, 3002];
-
-ports.forEach(port => spawnServer(port));
+let LAST_USED_SERVER_PORT = 0;
+const ports: number[] = [];
+for (let i = 1; i <= NUMBER_OF_SERVERS_TO_SPAWN; i++) {
+  const port = LOAD_BALANCER_PORT + i;
+  spawnServer(port);
+  ports.push(port);
+}
 
 const app = express();
 
 app.get('/address', (req: Request, resp: Response) => {
-  index = (index + 1) % ports.length;
+  LAST_USED_SERVER_PORT = (LAST_USED_SERVER_PORT + 1) % ports.length;
   resp.send({
-    address: `ws://localhost:${ports[index]}`,
+    address: `ws://localhost:${ports[LAST_USED_SERVER_PORT]}`,
   });
 });
 
-app.listen(new URL(LOAD_BALANCER_URL).port);
+app.listen(LOAD_BALANCER_PORT);

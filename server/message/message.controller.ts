@@ -19,9 +19,8 @@ export class MessageController extends BaseSocketController {
   @EmitOnFail('save_error')
   async save(@ConnectedSocket() socket: Socket, @MessageBody() message: Message) {
     await this.validateMessage(message);
-    const user = this.getCurrentUser(socket);
-    console.log('user:', user);
-    console.log('received message:', message);
+    const user = this.getSocketUser(socket);
+    console.log('received message:', message, ' from user:', user.id);
     message.id = 1;
     this.emitToAllUserConnections(socket, 'save_success', message, {
       ignoreCurrentConnection: true,

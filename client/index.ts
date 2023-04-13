@@ -72,7 +72,7 @@ async function main() {
   socket.on('connect', () => {
     console.log('client connected');
     socket.tokenExpired = false;
-    if (EMIT_EVENT === 'true' && !messageSent) {
+    if (EMIT_EVENT && !messageSent) {
       socket.emit('save', { text: 'hello' }, response => {
         console.log(response);
         messageSent = true;

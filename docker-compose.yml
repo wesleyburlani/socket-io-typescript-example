@@ -3,6 +3,6 @@ version: '3'
 services:
   redis:
     image: redis
-    command: redis-server --requirepass Redis2019!
+    command: redis-server --requirepass RedisPassword000!
     ports:
       - "6379:6379"
