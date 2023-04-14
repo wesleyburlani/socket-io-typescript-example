@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "server": "ts-node server/index.ts",
+    "spawn-clients": "ts-node client/spawn-multiple-clients.ts",
     "client:with-save-event": "EMIT_EVENT=true ts-node client/index.ts",
     "client": "ts-node client/index.ts",
     "load-balancer": "ts-node load-balancer/index.ts"

@@ -4,7 +4,6 @@ import * as dotenv from 'dotenv';
 import { z } from 'zod';
 
 const schema = z.object({
-  EMIT_EVENT: z.coerce.boolean().optional().default(false),
   JWT_SIGNINGKEY: z.string(),
   REDIS_CONNECTION_STRING: z.string().url(),
   LOAD_BALANCER_URL: z.string().url(),
